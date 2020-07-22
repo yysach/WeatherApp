@@ -8,13 +8,10 @@ const forecast = (lattitude,longitude, callback)=> {
     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
     .then(({ body }) => {
         if(body.error){
-            callback('unable to find the weather for location. Please try again !',undefined)
+            return callback('unable to find the weather for location. Please try again !',undefined);
         }
       const data  = body;
       callback(undefined,data);
-    })
-    .catch((err)=>{
-        callback('unable to connect weather service',undefined);
-    })
+    });
 }
 module.exports = forecast;

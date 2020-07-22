@@ -7,7 +7,7 @@ const geocode = (address, callback)=> {
     .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
     .then(( { body } ) => {
         if(body.features.length==0){
-            callback('unable to find the location. Please try again !',undefined)
+            return callback('unable to find the location. Please try again !',undefined);
         }
       const data  ={
           lattitude : body.features[0].center[1],
@@ -15,10 +15,7 @@ const geocode = (address, callback)=> {
           location : body.features[0].place_name
       }
       callback(undefined,data);
-    })
-    .catch((err)=>{
-        callback('unable to connect location service',undefined);
-    })
+    });
 }
 
 module.exports= geocode;
